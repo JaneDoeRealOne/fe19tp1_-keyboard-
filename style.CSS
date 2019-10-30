@@ -1,0 +1,135 @@
+
+html, body { 
+    margin:0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+}
+
+@media screen and (min-width: 700px) {
+    .mainContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height:100%;
+    }
+}
+
+.contentContainer {
+    display: flex;
+
+
+}
+
+/*----  popupModal ----*/
+
+.modalContainer {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    padding-top:18rem;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(201, 201, 201, 0.8);
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+}
+
+.modalContent {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+    margin:auto;
+    padding:2rem;
+    border-radius:2rem;
+    box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.29);
+    width: 25rem;
+}
+
+
+#btnModal {
+   
+    background-color: rgb(59, 92, 136);
+    margin-top: 2rem;
+    color: #fffdfd;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    border: 2px solid rgb(185, 185, 185);
+    -webkit-appearance: none;
+    border-radius: 1.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+#btnModal:hover { 
+    background-color: rgb(15, 15, 124);
+
+}
+
+
+/*-- NavMenu--*/
+
+.navContainer {
+    width: 100%;
+    height: auto;
+    margin:0;
+    background-color:#2d3492;
+}
+
+.navMenu {
+    padding-inline-start: 0rem; 
+    font-size: 1.8rem;
+    color:whitesmoke;
+    cursor: pointer;
+}
+
+li {
+    display: inline; 
+    padding: 0.8rem 1.6rem; 
+}
+
+li a {
+    color: #fffdfd;
+    text-decoration: none;   
+}
+
+li:hover {
+   background-color: rgb(22, 24, 129);
+}
+.active {
+    background-color: rgb(22, 24, 129);
+   
+}
+
+@media screen and (min-width: 700px) {
+    .navContainer {
+        width: auto;
+        height: 100%;
+        margin:0;
+        background-color:#2d3492;   
+    
+    }
+
+    .navMenu {
+        margin-block-start: 0em;
+        font-size: 2.5rem;
+    }
+    
+    li {
+        display:list-item;  
+    }
+}
