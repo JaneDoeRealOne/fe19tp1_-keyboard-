@@ -7,8 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quire</title>
     <link rel="stylesheet" href="style.CSS">
-    <script src="app.js"></script>
+    
     <script src="https://kit.fontawesome.com/09318c1397.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js"></script>
+        <script src="app.js"></script>
 </head>
 
 <body>
@@ -23,13 +26,35 @@
             </ul>
         </nav>
 
+        <div class="contentContainer">
+            <div class="containerBoard">
+                <div class="noteBoard" id="noteBoard">
+                    
+                    <div class="noteContainer" id="noteContainer">
+    
+                    </div>
+                </div>
+
+                <div class="noteEditor" id="noteEditor">
+
+                    <div id="textEditor">
+                        <h1>Start typing here</h1>
+                    </div>
+                    <div id="btnSave"><i class="fas fa-save"></i><span>Save</span></div>
+                    <i class="fas fa-pencil-alt" id="addNote"></i>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 
     <div id="modalContainer" class="modalContainer">
         <div id="modalContent" class="modalContent">
-            <h1 class="modalTitle"> Welcome to Quire</h1>
-            <p>the service that allows you to create your own notes</p>
+               <!-- <i id="qIcone" class="fab fa-quora"></i>-->
+            <h1 class="modalTitle">Quire</h1>
+            <h4 class="underTitle">All your notes in one place.</h4>
+            <p><b>Quire</b> ​is the app that keeps all your notes organized.The notes are being saved with a title and a date to make it easy finding them.The important notes can be added to favourites and there can be easily edited orprinted.Quire it uses a text editor, so you can customize every note.</p>
             <div><button id="btnModal">Start here</button>
             </div>
         </div>
