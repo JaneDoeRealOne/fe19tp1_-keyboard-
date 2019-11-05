@@ -40,7 +40,7 @@ body {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top:18rem;
+    padding-top:15rem;
     left:0;
     top:0;
     width: 100%;
@@ -122,6 +122,7 @@ body {
 li {
     display: inline; 
     padding: 0.8rem 1.6rem; 
+    transition: all .4s ease-in-out;
 }
 
 li a {
@@ -134,6 +135,7 @@ li:hover {
 }
 .active {
     background-color: rgb(22, 24, 129);
+
    
 }
 
@@ -164,15 +166,25 @@ li:hover {
     display: flex;
     flex-wrap: wrap;
     width:100%;
-    height:100%
+    height:100%;
+    overflow: hidden;
+    
     
 }
 
 .noteBoard {
     flex: 1 0 12rem;
     background-color: #f0eeee;
-    box-shadow: 6px 4px 5px 6px rgba(0,0,0,0.55);
+    max-height: 100%;
+    box-shadow: -1px 1px 5px 4px rgba(0,0,0,0.17);
+    overflow-x: hidden; 
+    overflow-y: scroll;
+
 }
+
+.noteBoard::-webkit-scrollbar { 
+    display: none; 
+} 
 
 
 .noteContainer {
@@ -212,18 +224,82 @@ li:hover {
 
 }
 
-#addNote {
+/*---- addnote Modal ----*/
+
+.addNoteContainer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top:20rem;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(216, 216, 216, 0.2);
+}
+
+
+.addNoteContent {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin:auto;
+    padding:1.8rem;
+    border-radius:2rem;
+    box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.29);
+    max-width: 25rem;
     
-     position: fixed;
-     right:2rem;
-     bottom:2rem;
-     padding:1rem;
-     font-size: 2rem;
-     border-radius: 2rem;
+}
+
+#yesBtn {
+    font-size: 1.2rem;
+    padding:0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#yesBtn:hover {
+    background-color: rgb(101, 187, 140);
+
+}
+
+
+#noBtn {
+    font-size: 1.2rem;
+    padding:0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#noBtn:hover {
+    background-color:rgb(211, 80, 80);
+}
+
+#addNoteBtn {
+    
+    position: fixed;
+    width: 65px;
+    height:65px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 65px;
+    vertical-align: middle;
+    right:2rem;
+    bottom:2rem;
+    padding:30xp;
+    font-size: 2rem;
 
      color:white;
      background-color: rgb(22, 24, 129);
      cursor: pointer;
+     transition: all .2s ease-in-out;
+}
+
+#addNoteBtn:hover {
+    transform: scale(1.1);
 }
 
 #textEditor {
@@ -232,17 +308,55 @@ li:hover {
 }
 
 #btnSave {
+ 
     position: fixed;
+    width: 65px;
+    height:65px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 65px;
+    vertical-align: middle;
+    right:11rem;
     bottom:2rem;
-    border-radius: 1rem;
-    padding:1rem;
-    font-size: 1rem;
-    background-color: rgb(235, 235, 235);
+    padding:30xp;
+    font-size: 2rem;
+    
+
+    color:white;
+    background-color: rgb(22, 24, 129);
     cursor: pointer;
+    transition: all .2s ease-in-out;
+    
+
 }
 
-#btnSave span {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 0.5rem;
-    font-weight:bold;
+#btnSave:hover {
+    transform: scale(1.1);
+
+}
+
+#btnPrint {
+    
+    position: fixed;
+    width: 65px;
+    height:65px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 65px;
+    vertical-align: middle;
+    right:6.5rem;
+    bottom:2rem;
+    padding:30xp;
+    font-size: 2rem;
+    
+
+    color:white;
+    background-color: rgb(22, 24, 129);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+}
+
+#btnPrint:hover{
+    transform: scale(1.1);
 }
