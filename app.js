@@ -1,4 +1,5 @@
 let editor;
+let selectedNoteId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use this to access html elements when loaded
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     })
 
-    
+
 
 
     let btnSave = document.querySelector('#btnSave');
@@ -29,7 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let noteList = getNotes();
 
-        noteList.unshift(noteObject);
+        if (selectedNoteId === null) {
+            noteList.unshift(noteObject);
+
+        } else {
+            for (i = 0; i < noteList.length; i++) {
+                if (noteList[i].id === selectedNoteId) {
+                    noteList[i].text = text;
+                    break;
+                }
+            }
+        }
 
         setNotes(noteList);
 
@@ -38,38 +49,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     showNotes();
 
-
     let addBtn = document.querySelector('#addNoteBtn');
-         
+
     let noteModal = document.querySelector('#addNoteContainer');
     let yesBtn = document.querySelector('#yesBtn');
     let noBtn = document.querySelector('#noBtn');
-    
+
 
     addBtn.onclick = function () {
         noteModal.style.display = 'block';
         window.onclick = function (e) {
             if (e.target == noteModal) {
-                noteModal.style.display ='none';
+                noteModal.style.display = 'none';
             }
         }
     }
 
     yesBtn.onclick = function () {
         noteModal.style.display = 'none';
-        editor.html.set(''); 
+        editor.html.set('<h1></h1>');
+        selectedNoteId = null;
+        removeSelectionInNoteList();
     }
 
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
     }
 
-   
-
-})
-
-
-//let textRemove = editor.html.set('');
+});
 
 function addZero(i) {
     if (i < 10) {
@@ -134,8 +141,7 @@ function setNotes(noteList) {
     localStorage.setItem('notes', JSON.stringify(noteList));
 }
 
-
-function noteClicked(element) {
+function removeSelectionInNoteList() {
 
     let notes = document.querySelectorAll('.noteContent');
 
@@ -143,6 +149,12 @@ function noteClicked(element) {
         let note = notes[i];
         note.classList.remove("noteContentActive");
     }
+
+}
+
+function noteClicked(element) {
+
+    removeSelectionInNoteList();
 
     element.classList.add("noteContentActive");
 
@@ -157,6 +169,7 @@ function noteClicked(element) {
         }
     }
 
+    selectedNoteId = idNote;
 
 }
 
