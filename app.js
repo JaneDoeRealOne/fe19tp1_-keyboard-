@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
 
-
-
     let btnSave = document.querySelector('#btnSave');
 
     btnSave.onclick = function () {
@@ -22,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let id = Math.floor((Math.random() * 999) + 99).toString();
 
         let noteObject = {
-            "id": id,
-            "text": text,
-            "date": date,
-            "isFavorite": false
+            id: id,
+            text: text,
+            date: date,
+            isFavorite: false
         }
 
         let noteList = getNotes();
@@ -67,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     yesBtn.onclick = function () {
         noteModal.style.display = 'none';
-        editor.html.set('<h1></h1>');
+        clearEditor();
         selectedNoteId = null;
         removeSelectionInNoteList();
     }
@@ -75,8 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
     }
-
 });
+
+function clearEditor() {
+    editor.html.set('<h1></h1>');
+}
 
 function addZero(i) {
     if (i < 10) {
@@ -112,19 +113,40 @@ function showNotes() {
     for (i = 0; i < noteList.length; i++) {
         let object = noteList[i];
 
-        let htmlItem = creatNote(object);
+        let htmlItem = createNote(object);
+
+        //TODO showNotes has to consider selectedNoteId. EL
 
         noteRows.innerHTML += htmlItem
     }
 
-    function creatNote(object) {
+    function createNote(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
         <h1 class="text">${object.text}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
+        <i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
         </div>
         `
     }
+}
+
+function deleteSelectedNote(element) {
+    let noteList = getNotes();
+
+    for (i = 0; i < noteList.length; i++) {
+        let note = noteList[i];
+
+        if (note.id === selectedNoteId) {
+            noteList.splice(i, 1);
+            break;
+        }
+    }
+        // TODO make the trashpin only show up fore active item. El
+        
+    clearEditor();
+    setNotes(noteList);
+    showNotes();
 }
 
 function getNotes() {
