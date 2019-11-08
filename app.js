@@ -30,23 +30,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (selectedNoteId === null || noteList.length === 0) {
             noteList.unshift(noteObject);
+            selectedNoteId = id;
 
         } else {
             for (i = 0; i < noteList.length; i++) {
                 if (noteList[i].id === selectedNoteId) {
                     noteList[i].text = text;
+
                     break;
                 }
             }
         }
-
-        selectedNoteId = id;
-
+        
         setNotes(noteList);
 
         showNotes();
+       
     };
 
+    
     showNotes();
 
     let addBtn = document.querySelector('#addNoteBtn');
@@ -129,7 +131,7 @@ function showNotes() {
     function createNote(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
-        <h1 class="text">${object.text}</h1>
+        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0,15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
         </div>
@@ -139,7 +141,7 @@ function showNotes() {
     function createNoteSelected(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
-        <h1 class="text">${object.text}</h1>
+        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0,15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
         </div>
@@ -214,6 +216,14 @@ function noteClicked(element) {
     
 
 }
+// function thats remove all Html tags from the text.
+function removeHtmlTagsFromText(html){
+
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
+
 
 window.onload = function () {
 
