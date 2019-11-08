@@ -220,6 +220,10 @@ li:hover {
     visibility: hidden;
 }
 
+.deleteBtnContainerActive {
+    visibility: visible;
+}
+
 .deleteBtn {
    /*transition: all .2s ease-in-out;*/
 }

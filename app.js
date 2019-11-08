@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
+        selectedNoteId = id;
+        
         setNotes(noteList);
 
         showNotes();
@@ -113,9 +115,13 @@ function showNotes() {
     for (i = 0; i < noteList.length; i++) {
         let object = noteList[i];
 
-        let htmlItem = createNote(object);
+        let htmlItem;
 
-        //TODO showNotes has to consider selectedNoteId. EL
+        if (object.id === selectedNoteId) {
+            htmlItem = createNoteSelected(object);
+        } else {
+            htmlItem = createNote(object);
+        }
 
         noteRows.innerHTML += htmlItem
     }
@@ -128,11 +134,21 @@ function showNotes() {
         <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
         </div>
         `
+    } 
+
+    function createNoteSelected(object) {
+        return `
+        <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
+        <h1 class="text">${object.text}</h1>
+        <p class="date">${formatDate(new Date(object.date))}</p>
+        <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
+        </div>
+        `
     }
 }
 
 function deleteSelectedNote(element) {
-   
+
     let noteList = getNotes();
 
     for (i = 0; i < noteList.length; i++) {
@@ -143,7 +159,7 @@ function deleteSelectedNote(element) {
             break;
         }
     }
-        
+
     clearEditor();
     setNotes(noteList);
     showNotes();
@@ -170,7 +186,7 @@ function removeSelectionInNoteList() {
     for (i = 0; i < notes.length; i++) {
         let note = notes[i];
         note.classList.remove("noteContentActive");
-     note.querySelector('.deleteBtnContainer').style.visibility="hidden";
+        note.querySelector('.deleteBtnContainer').classList.remove('deleteBtnContainerActive');
     }
 
 }
@@ -194,8 +210,8 @@ function noteClicked(element) {
 
     selectedNoteId = idNote;
 
-   let deleteBtn = element.querySelector('.deleteBtnContainer');
-   deleteBtn.style.visibility="visible";
+    element.querySelector('.deleteBtnContainer').classList.add('deleteBtnContainerActive');
+    
 
 }
 
