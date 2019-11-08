@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let noteList = getNotes();
 
-        if (selectedNoteId === null) {
+        if (selectedNoteId === null || noteList.length === 0) {
             noteList.unshift(noteObject);
 
         } else {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         selectedNoteId = id;
-        
+
         setNotes(noteList);
 
         showNotes();
