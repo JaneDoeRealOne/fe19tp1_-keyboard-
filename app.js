@@ -125,13 +125,14 @@ function showNotes() {
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
         <h1 class="text">${object.text}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
-        <i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
+        <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
         </div>
         `
     }
 }
 
 function deleteSelectedNote(element) {
+   
     let noteList = getNotes();
 
     for (i = 0; i < noteList.length; i++) {
@@ -142,7 +143,6 @@ function deleteSelectedNote(element) {
             break;
         }
     }
-        // TODO make the trashpin only show up fore active item. El
         
     clearEditor();
     setNotes(noteList);
@@ -170,6 +170,7 @@ function removeSelectionInNoteList() {
     for (i = 0; i < notes.length; i++) {
         let note = notes[i];
         note.classList.remove("noteContentActive");
+     note.querySelector('.deleteBtnContainer').style.visibility="hidden";
     }
 
 }
@@ -192,6 +193,9 @@ function noteClicked(element) {
     }
 
     selectedNoteId = idNote;
+
+   let deleteBtn = element.querySelector('.deleteBtnContainer');
+   deleteBtn.style.visibility="visible";
 
 }
 

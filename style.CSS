@@ -216,10 +216,14 @@ li:hover {
     padding:2rem;
 }
 
-.deleteBtn {
-    transition: all .2s ease-in-out;
-
+.deleteBtnContainer {
+    visibility: hidden;
 }
+
+.deleteBtn {
+   /*transition: all .2s ease-in-out;*/
+}
+
 .deleteBtn:hover {
     transform: scale(1.1);
 }
