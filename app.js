@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
-        
+
         setNotes(noteList);
 
         showNotes();
-       
+
     };
 
-    
+
     showNotes();
 
     let addBtn = document.querySelector('#addNoteBtn');
@@ -130,24 +130,59 @@ function showNotes() {
 
     function createNote(object) {
         return `
+        
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
-        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0,15)}</h1>
+        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
+        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
-        <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
+        <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
+       </div>
         </div>
         `
-    } 
+    }
 
     function createNoteSelected(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
-        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0,15)}</h1>
+        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
+        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
-        <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
+        <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
+       </div>
         </div>
         `
     }
 }
+
+
+/*favoriteBtnNavbar.onclick = function() {
+
+}*/
+
+function favoriteSelectedNote(element, parentId) {
+    let noteList = getNotes();
+
+    for (i = 0; i < noteList.length; i++) {
+        let note = noteList[i];
+
+        if (note.id === parentId.toString()) {
+
+            if (note.isFavorite === true) {
+                element.classList.remove('favoriteBtnActive');
+                noteList[i].isFavorite = false;
+              
+            } else {
+                element.classList.add('favoriteBtnActive');
+                noteList[i].isFavorite = true;
+            }
+
+        }
+    }
+
+    setNotes(noteList);
+
+}
+
 
 function deleteSelectedNote(element) {
 
@@ -213,15 +248,15 @@ function noteClicked(element) {
     selectedNoteId = idNote;
 
     element.querySelector('.deleteBtnContainer').classList.add('deleteBtnContainerActive');
-    
+
 
 }
 // function thats remove all Html tags from the text.
-function removeHtmlTagsFromText(html){
+function removeHtmlTagsFromText(html) {
 
-   var tmp = document.createElement("DIV");
-   tmp.innerHTML = html;
-   return tmp.textContent || tmp.innerText || "";
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
 }
 
 
