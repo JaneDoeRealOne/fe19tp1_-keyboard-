@@ -177,15 +177,15 @@ li:hover {
     background-color: #f0eeee;
     max-height: 100%;
     box-shadow: -1px 1px 5px 4px rgba(0,0,0,0.17);
-    overflow-x: hidden;
+    overflow-x: hidden; 
     overflow-y: scroll;
-
 
 }
 
 .noteBoard::-webkit-scrollbar { 
-    display: none;
+    display: none; 
 } 
+
 
 .noteContainer {
 
@@ -198,12 +198,16 @@ li:hover {
 .noteContent{
     padding:1rem;
     text-align: start;
+    
+
     border-bottom-style: solid;
     border-width:thin;
     border-color: rgb(221, 221, 221);
-    cursor: pointer;    
-}
+    cursor: pointer;
 
+    
+    
+}
 .noteContentActive{
     background-color: #fffdfd;
 
@@ -214,22 +218,10 @@ li:hover {
     background-color: #fffdfd;
     flex: 5 0 auto;
     padding:2rem;
-}
+    
+   
+    
 
-.deleteBtnContainer {
-    visibility: hidden;
-}
-
-.deleteBtnContainerActive {
-    visibility: visible;
-}
-
-.deleteBtn {
-   /*transition: all .2s ease-in-out;*/
-}
-
-.deleteBtn:hover {
-    transform: scale(1.1);
 }
 
 /*---- addnote Modal ----*/
@@ -334,6 +326,8 @@ li:hover {
     background-color: rgb(22, 24, 129);
     cursor: pointer;
     transition: all .2s ease-in-out;
+    
+
 }
 
 #btnSave:hover {

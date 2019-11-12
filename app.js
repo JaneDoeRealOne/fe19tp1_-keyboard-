@@ -1,5 +1,4 @@
 let editor;
-let selectedNoteId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use this to access html elements when loaded
@@ -11,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     })
 
+    
+
 
     let btnSave = document.querySelector('#btnSave');
 
@@ -20,27 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
         let id = Math.floor((Math.random() * 999) + 99).toString();
 
         let noteObject = {
-            id: id,
-            text: text,
-            date: date,
-            isFavorite: false
+            "id": id,
+            "text": text,
+            "date": date,
+            "isFavorite": false
         }
 
         let noteList = getNotes();
 
-        if (selectedNoteId === null || noteList.length === 0) {
-            noteList.unshift(noteObject);
-
-        } else {
-            for (i = 0; i < noteList.length; i++) {
-                if (noteList[i].id === selectedNoteId) {
-                    noteList[i].text = text;
-                    break;
-                }
-            }
-        }
-
-        selectedNoteId = id;
+        noteList.unshift(noteObject);
 
         setNotes(noteList);
 
@@ -49,37 +38,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     showNotes();
 
-    let addBtn = document.querySelector('#addNoteBtn');
 
+    let addBtn = document.querySelector('#addNoteBtn');
+         
     let noteModal = document.querySelector('#addNoteContainer');
     let yesBtn = document.querySelector('#yesBtn');
     let noBtn = document.querySelector('#noBtn');
-
+    
 
     addBtn.onclick = function () {
         noteModal.style.display = 'block';
         window.onclick = function (e) {
             if (e.target == noteModal) {
-                noteModal.style.display = 'none';
+                noteModal.style.display ='none';
             }
         }
     }
 
     yesBtn.onclick = function () {
         noteModal.style.display = 'none';
-        clearEditor();
-        selectedNoteId = null;
-        removeSelectionInNoteList();
+        editor.html.set(''); 
     }
 
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
     }
-});
 
-function clearEditor() {
-    editor.html.set('<h1></h1>');
-}
+   
+
+})
+
+
+//let textRemove = editor.html.set('');
 
 function addZero(i) {
     if (i < 10) {
@@ -115,54 +105,19 @@ function showNotes() {
     for (i = 0; i < noteList.length; i++) {
         let object = noteList[i];
 
-        let htmlItem;
-
-        if (object.id === selectedNoteId) {
-            htmlItem = createNoteSelected(object);
-        } else {
-            htmlItem = createNote(object);
-        }
+        let htmlItem = creatNote(object);
 
         noteRows.innerHTML += htmlItem
     }
 
-    function createNote(object) {
+    function creatNote(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
         <h1 class="text">${object.text}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
-        <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
-        </div>
-        `
-    } 
-
-    function createNoteSelected(object) {
-        return `
-        <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
-        <h1 class="text">${object.text}</h1>
-        <p class="date">${formatDate(new Date(object.date))}</p>
-        <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i></div>
         </div>
         `
     }
-}
-
-function deleteSelectedNote(element) {
-
-    let noteList = getNotes();
-
-    for (i = 0; i < noteList.length; i++) {
-        let note = noteList[i];
-
-        if (note.id === selectedNoteId) {
-            noteList.splice(i, 1);
-            break;
-        }
-    }
-
-    clearEditor();
-    setNotes(noteList);
-    showNotes();
 }
 
 function getNotes() {
@@ -179,21 +134,15 @@ function setNotes(noteList) {
     localStorage.setItem('notes', JSON.stringify(noteList));
 }
 
-function removeSelectionInNoteList() {
+
+function noteClicked(element) {
 
     let notes = document.querySelectorAll('.noteContent');
 
     for (i = 0; i < notes.length; i++) {
         let note = notes[i];
         note.classList.remove("noteContentActive");
-        note.querySelector('.deleteBtnContainer').classList.remove('deleteBtnContainerActive');
     }
-
-}
-
-function noteClicked(element) {
-
-    removeSelectionInNoteList();
 
     element.classList.add("noteContentActive");
 
@@ -208,10 +157,6 @@ function noteClicked(element) {
         }
     }
 
-    selectedNoteId = idNote;
-
-    element.querySelector('.deleteBtnContainer').classList.add('deleteBtnContainerActive');
-    
 
 }
 
@@ -237,4 +182,24 @@ window.onload = function () {
     }
 
 
+}
+
+
+//Print Button btnPrint
+
+function btnPrint(textEditor) {
+    let printContent = document.getElementById(textEditor).innerHTML;
+    let originalContent = document.body.innerHTML;
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+    location.reload();    
+ }
+
+
+
+ function removeHtmlTagsFromText(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
 }

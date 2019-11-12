@@ -7,13 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quire</title>
     <link rel="stylesheet" href="style.CSS">
-
+    
     <script src="https://kit.fontawesome.com/09318c1397.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css" rel="stylesheet"
-        type="text/css" />
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js"></script>
-    <script src="app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js"></script>
+        <script src="app.js"></script>
 </head>
 
 <body>
@@ -24,28 +22,28 @@
                 <li class="active"><a href="index.html"><i class="fab fa-quora" id="homeBtn"></i></a></li>
                 <li><a href="search.html"><i class="fas fa-search" id="searchBtn"></i></a></li>
                 <li><a href="favorite.html"><i class="far fa-star"></i></a></li>
-               <!-- <li><i id="deleteBtn" class="fas fa-trash-alt"></i></a></li>-->
+                <li><i class="fas fa-trash-alt"></i></a></li>
             </ul>
         </nav>
 
         <div class="contentContainer">
             <div class="containerBoard">
                 <div class="noteBoard" id="noteBoard">
-
+                    
                     <div class="noteContainer" id="noteContainer">
-
+    
                     </div>
                 </div>
 
                 <div class="noteEditor" id="noteEditor">
 
                     <div id="textEditor">
-                        <h1></h1>
+                    <h1></h1>
                     </div>
-
-                    <div id="btnSave"><i class="fas fa-save"></i></div>
-                    <div id="btnPrint"><i class="fas fa-print"></i></div>
-                    <div id="addNoteBtn"> <i class="fas fa-pencil-alt"></i></div>
+                    
+                    <div id="btnSave"><i class="fas fa-save" ></i></div>
+                    <div id="btnPrint"><i class="fas fa-print" onclick="btnPrint('textEditor')"></i></div>
+                    <div id="addNoteBtn"> <i class="fas fa-pencil-alt" ></i></div>
                 </div>
 
             </div>
@@ -54,8 +52,8 @@
                 <div id="addNoteContent" class="addNoteContent">
                     <h3>Are you sure that you want to start with a new note?</h3>
                     <div class="groupBtns"><button id="yesBtn">Yes</button>
-                        <button id="noBtn">No</button>
-                    </div>
+                    <button id="noBtn">No</button>
+                </div>
                 </div>
 
 
@@ -68,12 +66,10 @@
 
     <div id="modalContainer" class="modalContainer">
         <div id="modalContent" class="modalContent">
-            <!-- <i id="qIcone" class="fab fa-quora"></i>-->
+               <!-- <i id="qIcone" class="fab fa-quora"></i>-->
             <h1 class="modalTitle">Quire</h1>
             <h4 class="underTitle">All your notes in one place.</h4>
-            <p><b>Quire</b> ​is the app that keeps all your notes organized.The notes are being saved with a title and a
-                date to make it easy finding them.The important notes can be added to favourites and there can be easily
-                edited orprinted.Quire it uses a text editor, so you can customize every note.</p>
+            <p><b>Quire</b> ​is the app that keeps all your notes organized.The notes are being saved with a title and a date to make it easy finding them.The important notes can be added to favourites and there can be easily edited orprinted.Quire it uses a text editor, so you can customize every note.</p>
             <div><button id="btnModal">Start here</button>
             </div>
         </div>
