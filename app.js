@@ -77,7 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
     }
+
+
+   
+    
+
+
 });
+
+
 
 function clearEditor() {
     editor.html.set('<h1></h1>');
@@ -132,7 +140,7 @@ function showNotes() {
         return `
         
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
-        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
+        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
         <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
@@ -140,11 +148,12 @@ function showNotes() {
         </div>
         `
     }
+    
 
     function createNoteSelected(object) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
-        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
+        <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id}"></i></div>
         <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
@@ -156,8 +165,18 @@ function showNotes() {
 
 
 /*favoriteBtnNavbar.onclick = function() {
-
+    
 }*/
+
+function favoriteSelectedNoteCheck(object) {
+
+    if (object.isFavorite === true) {
+        return 'favoriteBtnActive';
+    } else {
+        return "";
+    }
+}
+
 
 function favoriteSelectedNote(element, parentId) {
     let noteList = getNotes();
@@ -170,7 +189,7 @@ function favoriteSelectedNote(element, parentId) {
             if (note.isFavorite === true) {
                 element.classList.remove('favoriteBtnActive');
                 noteList[i].isFavorite = false;
-              
+
             } else {
                 element.classList.add('favoriteBtnActive');
                 noteList[i].isFavorite = true;
@@ -227,6 +246,7 @@ function removeSelectionInNoteList() {
     }
 
 }
+
 
 function noteClicked(element) {
 
