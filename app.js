@@ -1,5 +1,6 @@
 let editor;
 let selectedNoteId = null;
+let selectedNavbarItemIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use this to access html elements when loaded
@@ -42,10 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
+
         setNotes(noteList);
 
-        showNotes();
-
+        if (selectedNavbarItemIndex === 0) {
+            showNotes();
+        } else if (selectedNavbarItemIndex === 2) {
+            showNotes(getFavoriteNotes());
+        }
+           // TODO if in favorite page mark note as favorite.El
+        
     };
 
 
@@ -78,13 +85,45 @@ document.addEventListener("DOMContentLoaded", function () {
         noteModal.style.display = 'none';
     }
 
+        // TODO refactor onclick. Move to seperate function. El
+     
+    let favBtnNavbar = document.querySelector('#favoriteBtnNavbar');
+    let FavoriteTitle = document.querySelector('.noteBordTitle');
 
-   
-    
+    favBtnNavbar.onclick = function () {
+        getFavoriteNotes();
+        FavoriteTitle.innerHTML = 'Favorite notes';
+        showNotes(getFavoriteNotes());
+        selectedNavbarItemIndex = 2;
+
+        removeActiveClassNavbar();
+        favBtnNavbar.classList.add('active');
+    }
+
+    let homeTitle = document.querySelector('.noteBordTitle');
+    let homeBtn = document.querySelector('#homeBtn');
+
+    homeBtn.onclick = function () {
+        homeTitle.innerHTML = 'All notes';
+        showNotes();
+
+        removeActiveClassNavbar();
+        homeBtn.classList.add('active');
+        selectedNavbarItemIndex = 0;
+    }
 
 
 });
 
+function removeActiveClassNavbar() {
+    let allMenuItems = document.querySelectorAll('.navMenu li');
+
+    allMenuItems.forEach(menuItem => {
+        menuItem.classList.remove('active');
+
+    });
+
+}
 
 
 function clearEditor() {
@@ -116,14 +155,13 @@ function formatDate(date) {
     return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour + ':' + minutes;
 }
 
-function showNotes() {
+
+function showNotes(notes = getNotes()) {
     let noteRows = document.querySelector('#noteContainer');
     noteRows.innerHTML = '';
 
-    let noteList = getNotes();
-
-    for (i = 0; i < noteList.length; i++) {
-        let object = noteList[i];
+    for (i = 0; i < notes.length; i++) {
+        let object = notes[i];
 
         let htmlItem;
 
@@ -148,7 +186,7 @@ function showNotes() {
         </div>
         `
     }
-    
+
 
     function createNoteSelected(object) {
         return `
@@ -163,10 +201,6 @@ function showNotes() {
     }
 }
 
-
-/*favoriteBtnNavbar.onclick = function() {
-    
-}*/
 
 function favoriteSelectedNoteCheck(object) {
 
@@ -220,6 +254,15 @@ function deleteSelectedNote(element) {
     setNotes(noteList);
     showNotes();
 }
+
+function getFavoriteNotes() {
+
+    let noteList = getNotes();
+    let favorites = noteList.filter(note => note.isFavorite);
+    return favorites;
+}
+
+
 
 function getNotes() {
 
