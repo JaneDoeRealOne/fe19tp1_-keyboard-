@@ -1,6 +1,6 @@
-let editor;
-let selectedNoteId = null;
-let selectedNavbarItemIndex = 0;
+let editor; // object. Representing Froala editor example get the text from here.
+let selectedNoteId = null; // string. Null if no selected note otherwise notes id. 
+let selectedNavbarItemIndex = 0; // integer. 0 = homepage, 1 = search, 2 = favorite.
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use this to access html elements when loaded
@@ -19,21 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
         let text = editor.html.get();
         let date = new Date();
         let id = Math.floor((Math.random() * 999) + 99).toString();
+        let isFavorite = selectedNavbarItemIndex === 2
 
         let noteObject = {
             id: id,
             text: text,
             date: date,
-            isFavorite: false
+            isFavorite: isFavorite
         }
 
         let noteList = getNotes();
 
+        // When creating new note
         if (selectedNoteId === null || noteList.length === 0) {
             noteList.unshift(noteObject);
             selectedNoteId = id;
-
-        } else {
+        
+        } else { // When editing existing note
             for (i = 0; i < noteList.length; i++) {
                 if (noteList[i].id === selectedNoteId) {
                     noteList[i].text = text;
@@ -44,14 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+
         setNotes(noteList);
 
-        if (selectedNavbarItemIndex === 0) {
+        if (selectedNavbarItemIndex === 0) { 
             showNotes();
         } else if (selectedNavbarItemIndex === 2) {
             showNotes(getFavoriteNotes());
         }
-           // TODO if in favorite page mark note as favorite.El
         
     };
 
@@ -91,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let FavoriteTitle = document.querySelector('.noteBordTitle');
 
     favBtnNavbar.onclick = function () {
+        selectedNoteId = null; 
+        clearEditor();
         getFavoriteNotes();
         FavoriteTitle.innerHTML = 'Favorite notes';
         showNotes(getFavoriteNotes());
@@ -105,15 +109,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     homeBtn.onclick = function () {
         homeTitle.innerHTML = 'All notes';
+        selectedNoteId = null; 
+        clearEditor();
         showNotes();
 
         removeActiveClassNavbar();
         homeBtn.classList.add('active');
         selectedNavbarItemIndex = 0;
+        
     }
 
 
 });
+
+
 
 function removeActiveClassNavbar() {
     let allMenuItems = document.querySelectorAll('.navMenu li');
@@ -173,8 +182,8 @@ function showNotes(notes = getNotes()) {
 
         noteRows.innerHTML += htmlItem
     }
-
-    function createNote(object) {
+    
+    function createNote(object) { // Create html string based on noteObject data. 
         return `
         
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
@@ -187,6 +196,7 @@ function showNotes(notes = getNotes()) {
         `
     }
 
+            // Create html string, that adding active class on the string for marking item as active. 
 
     function createNoteSelected(object) {
         return `
@@ -211,7 +221,11 @@ function favoriteSelectedNoteCheck(object) {
     }
 }
 
-
+/**
+ * The function toggles isfavorite state by adding or remove css class. 
+ * @param {HTMLElement} element 
+ * @param {int} parentId 
+ */
 function favoriteSelectedNote(element, parentId) {
     let noteList = getNotes();
 
@@ -289,8 +303,11 @@ function removeSelectionInNoteList() {
     }
 
 }
-
-
+ /**
+  * The function adding a css class when noteObject is clicked. 
+  * If the noteObject has saved text itself, the text is showing in the editor.
+  * @param {HTMLElement} element 
+  */
 function noteClicked(element) {
 
     removeSelectionInNoteList();
@@ -314,15 +331,19 @@ function noteClicked(element) {
 
 
 }
-// function thats remove all Html tags from the text.
-function removeHtmlTagsFromText(html) {
+/**
+ * Function thats take a string and remove all Html tags from the string.
+ * @param {string} html 
+ */
+function removeHtmlTagsFromText(htmlString) {
 
     var tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
+    tmp.innerHTML = htmlString;
     return tmp.textContent || tmp.innerText || "";
 }
 
 
+// This will be called when page has finished loading.
 window.onload = function () {
 
     let container = document.querySelector('#modalContainer');
