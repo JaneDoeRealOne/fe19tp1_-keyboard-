@@ -89,6 +89,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // TODO refactor onclick. Move to seperate function. El
      
+    let searchTitle = document.querySelector('.noteBordTitle');
+    let searchBtn = document.querySelector('#searchBtn');
+    
+    searchBtn.onclick = function () {
+        searchTitle.innerHTML = 'Your search results';
+        selectedNoteId = null; 
+        
+        clearEditor();
+        showNotes();
+
+        removeActiveClassNavbar();
+        searchBtn.classList.add('active');
+        selectedNavbarItemIndex = 1;
+        toggleSearchInputField();
+    }
+
     let favBtnNavbar = document.querySelector('#favoriteBtnNavbar');
     let FavoriteTitle = document.querySelector('.noteBordTitle');
 
@@ -99,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         FavoriteTitle.innerHTML = 'Favorite notes';
         showNotes(getFavoriteNotes());
         selectedNavbarItemIndex = 2;
+        toggleSearchInputField();
 
         removeActiveClassNavbar();
         favBtnNavbar.classList.add('active');
@@ -116,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         removeActiveClassNavbar();
         homeBtn.classList.add('active');
         selectedNavbarItemIndex = 0;
-        
+        toggleSearchInputField();
     }
 
 
@@ -267,6 +284,19 @@ function deleteSelectedNote(element) {
     clearEditor();
     setNotes(noteList);
     showNotes();
+}
+
+
+
+function toggleSearchInputField() {
+
+    let inputText = document.querySelector('.searchField');
+
+    if(selectedNavbarItemIndex === 1) {
+     inputText.classList.add('searchFieldActive');
+    } else {
+        inputText.classList.remove('searchFieldActive');
+    }
 }
 
 function getFavoriteNotes() {

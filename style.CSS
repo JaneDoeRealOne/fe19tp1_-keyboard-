@@ -408,3 +408,15 @@ li:hover {
 #btnPrint:hover{
     transform: scale(1.1);
 }
+
+.searchField{
+    display: none;
+    width: 16.5rem;
+    font-size: 2rem;
+
+}
+.searchFieldActive {
+    display: block;
+    width: 16.5rem;
+    font-size: 2rem;
+}
