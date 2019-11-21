@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedNoteId === null || noteList.length === 0) {
             noteList.unshift(noteObject);
             selectedNoteId = id;
-        
+
         } else { // When editing existing note
             for (i = 0; i < noteList.length; i++) {
                 if (noteList[i].id === selectedNoteId) {
@@ -49,12 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setNotes(noteList);
 
-        if (selectedNavbarItemIndex === 0) { 
+        if (selectedNavbarItemIndex === 0) {
             showNotes();
+        } else if (selectedNavbarItemIndex === 1) {
+            setMenuHomePage();
+
         } else if (selectedNavbarItemIndex === 2) {
             showNotes(getFavoriteNotes());
         }
-        
+
+
     };
 
 
@@ -81,65 +85,93 @@ document.addEventListener("DOMContentLoaded", function () {
         clearEditor();
         selectedNoteId = null;
         removeSelectionInNoteList();
+
+
     }
 
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
     }
 
-        // TODO refactor onclick. Move to seperate function. El
-     
-    let searchTitle = document.querySelector('.noteBordTitle');
-    let searchBtn = document.querySelector('#searchBtn');
-    
-    searchBtn.onclick = function () {
-        searchTitle.innerHTML = 'Your search results';
-        selectedNoteId = null; 
-        
-        clearEditor();
-        showNotes();
+    // TODO refactor onclick. Move to seperate function. El
 
-        removeActiveClassNavbar();
-        searchBtn.classList.add('active');
-        selectedNavbarItemIndex = 1;
-        toggleSearchInputField();
+
+    let searchBtn = document.querySelector('#searchBtn');
+
+    searchBtn.onclick = function () {
+        setMenuSearchPage();
+
     }
 
     let favBtnNavbar = document.querySelector('#favoriteBtnNavbar');
-    let FavoriteTitle = document.querySelector('.noteBordTitle');
 
     favBtnNavbar.onclick = function () {
-        selectedNoteId = null; 
-        clearEditor();
-        getFavoriteNotes();
-        FavoriteTitle.innerHTML = 'Favorite notes';
-        showNotes(getFavoriteNotes());
-        selectedNavbarItemIndex = 2;
-        toggleSearchInputField();
+        setMenuFavoritePage();
 
-        removeActiveClassNavbar();
-        favBtnNavbar.classList.add('active');
     }
 
-    let homeTitle = document.querySelector('.noteBordTitle');
+
     let homeBtn = document.querySelector('#homeBtn');
 
     homeBtn.onclick = function () {
-        homeTitle.innerHTML = 'All notes';
-        selectedNoteId = null; 
-        clearEditor();
-        showNotes();
+        setMenuHomePage();
 
-        removeActiveClassNavbar();
-        homeBtn.classList.add('active');
-        selectedNavbarItemIndex = 0;
-        toggleSearchInputField();
     }
 
 
 });
 
 
+
+function setMenuHomePage() {
+    let homeTitle = document.querySelector('.noteBordTitle');
+    let homeBtn = document.querySelector('#homeBtn');
+    homeTitle.innerHTML = 'All notes';
+    selectedNoteId = null;
+    clearEditor();
+    showNotes();
+
+    removeActiveClassNavbar();
+    homeBtn.classList.add('active');
+    selectedNavbarItemIndex = 0;
+    toggleSearchInputField();
+}
+
+
+function setMenuSearchPage() {
+    let searchInput = document.querySelector('.searchField');
+    let searchBtn = document.querySelector('#searchBtn');
+    let searchTitle = document.querySelector('.noteBordTitle');
+    searchTitle.innerHTML = 'Search results';
+    selectedNoteId = null;
+    clearEditor();
+    showNotes([]);
+
+    removeActiveClassNavbar();
+    searchBtn.classList.add('active');
+    selectedNavbarItemIndex = 1;
+    toggleSearchInputField();
+    searchInput.addEventListener('keyup', () => {
+        showNotes(getSearchResult());
+
+    });
+}
+
+function setMenuFavoritePage() {
+
+    let favBtnNavbar = document.querySelector('#favoriteBtnNavbar');
+    let FavoriteTitle = document.querySelector('.noteBordTitle');
+    selectedNoteId = null;
+    clearEditor();
+    getFavoriteNotes();
+    FavoriteTitle.innerHTML = 'Favorite notes';
+    showNotes(getFavoriteNotes());
+    selectedNavbarItemIndex = 2;
+    toggleSearchInputField();
+
+    removeActiveClassNavbar();
+    favBtnNavbar.classList.add('active');
+}
 
 function removeActiveClassNavbar() {
     let allMenuItems = document.querySelectorAll('.navMenu li');
@@ -199,7 +231,7 @@ function showNotes(notes = getNotes()) {
 
         noteRows.innerHTML += htmlItem
     }
-    
+
     function createNote(object) { // Create html string based on noteObject data. 
         return `
         
@@ -213,7 +245,7 @@ function showNotes(notes = getNotes()) {
         `
     }
 
-            // Create html string, that adding active class on the string for marking item as active. 
+    // Create html string, that adding active class on the string for marking item as active. 
 
     function createNoteSelected(object) {
         return `
@@ -292,12 +324,31 @@ function toggleSearchInputField() {
 
     let inputText = document.querySelector('.searchField');
 
-    if(selectedNavbarItemIndex === 1) {
-     inputText.classList.add('searchFieldActive');
+    if (selectedNavbarItemIndex === 1) {
+        inputText.classList.add('searchFieldActive');
     } else {
         inputText.classList.remove('searchFieldActive');
     }
 }
+
+
+function getSearchResult() {
+
+    let searchInput = document.querySelector('.searchField');
+
+    let noteList = getNotes();
+    let searchText = searchInput.value.trim().toLowerCase();
+
+    if (searchText === "") {
+        return [];
+    } else {
+        return noteList.filter(note => note.text.toLowerCase().includes(searchText));
+    }
+
+}
+
+
+
 
 function getFavoriteNotes() {
 
@@ -333,11 +384,11 @@ function removeSelectionInNoteList() {
     }
 
 }
- /**
-  * The function adding a css class when noteObject is clicked. 
-  * If the noteObject has saved text itself, the text is showing in the editor.
-  * @param {HTMLElement} element 
-  */
+/**
+ * The function adding a css class when noteObject is clicked. 
+ * If the noteObject has saved text itself, the text is showing in the editor.
+ * @param {HTMLElement} element 
+ */
 function noteClicked(element) {
 
     removeSelectionInNoteList();

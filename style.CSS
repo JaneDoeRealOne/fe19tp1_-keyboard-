@@ -249,7 +249,7 @@ li:hover {
 }
 
 .favoriteBtn {
-    padding:0.5rem;
+    padding:0.3rem;
     font-size: 1.5rem;
   color: rgb(144, 144, 144);
 
@@ -417,6 +417,7 @@ li:hover {
 }
 .searchFieldActive {
     display: block;
+    padding:0.5rem;
     width: 16.5rem;
-    font-size: 2rem;
+    font-size: 1rem;
 }
