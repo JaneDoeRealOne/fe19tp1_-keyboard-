@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let noteModal = document.querySelector('#addNoteContainer');
     let yesBtn = document.querySelector('#yesBtn');
     let noBtn = document.querySelector('#noBtn');
+    let printBtn = document.querySelector('#btnPrint');
 
 
     addBtn.onclick = function () {
@@ -91,6 +92,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     noBtn.onclick = function () {
         noteModal.style.display = 'none';
+    }
+
+
+    printBtn.onclick = function () {
+        let printWindow = window.open('', 'PRINT', 'height=400, width=600');
+        let content = document.querySelector('.fr-view').innerHTML;
+        printWindow.document.write(content);
+
+        printWindow.document.close();
+
+        printWindow.focus();
+
+
+        // a workaround one the close function, https://stackoverflow.com/questions/6460630/close-window-automatically-after-printing-dialog-closes
+        printWindow.onload = function () {
+            printWindow.print();
+            setTimeout(function () { printWindow.close() }, 500);
+
+        }
+
     }
 
     // TODO refactor onclick. Move to seperate function. El
@@ -237,7 +258,7 @@ function showNotes(notes = getNotes()) {
         
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
         <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
-        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
+        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
        </div>
@@ -251,7 +272,7 @@ function showNotes(notes = getNotes()) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
         <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id}"></i></div>
-        <h1 class="text">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
+        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1>
         <p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
        </div>
@@ -409,7 +430,6 @@ function noteClicked(element) {
     selectedNoteId = idNote;
 
     element.querySelector('.deleteBtnContainer').classList.add('deleteBtnContainerActive');
-
 
 }
 /**
