@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let noteList = getNotes();
 
+
         // When creating new note
         if (selectedNoteId === null || noteList.length === 0) {
             noteList.unshift(noteObject);
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             for (i = 0; i < noteList.length; i++) {
                 if (noteList[i].id === selectedNoteId) {
                     noteList[i].text = text;
+                    noteList[i].date = new Date();
 
                     break;
                 }
@@ -238,6 +240,10 @@ function formatDate(date) {
 function showNotes(notes = getNotes()) {
     let noteRows = document.querySelector('#noteContainer');
     noteRows.innerHTML = '';
+
+    notes.sort(function (b, a) {
+        return  new Date(a.date) - new Date(b.date);
+    });
 
     for (i = 0; i < notes.length; i++) {
         let object = notes[i];
