@@ -142,11 +142,95 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
+
+
+    let statisticBtn = document.querySelector('#statisticBtn');
+
+    statisticBtn.onclick = function () {
+        setMenuStatisticPage();
+        AllCalculateStatistic();
+
+
+    }
+
+
 });
 
 
 
+function AllCalculateStatistic() {
+    let statisticAllNotes = document.querySelector('.totalNotes')
+    let statisticAllFavoriteNotes = document.querySelector('.totalFavorites')
+    let statisticLatestDateNote = document.querySelector('.latestUpdate')
+    let statisticLetterCount = document.querySelector('.totalLetters')
+
+    noteList = getNotes();
+
+    let noteListLength = noteList.length;
+    statisticAllNotes.innerHTML = noteListLength;
+
+    let noteListIsfavorite = 0;
+    let noteLatestDate = '';
+
+    noteList.forEach(note => {
+        if (note.isFavorite === true) {
+            noteListIsfavorite += 1;
+        }
+
+    });
+
+    statisticAllFavoriteNotes.innerHTML = noteListIsfavorite;
+
+
+    noteList.forEach(note => {
+        if (note.date > noteLatestDate) {
+            noteLatestDate = note.date;
+        }
+
+    });
+
+    statisticLatestDateNote.innerHTML = formatDate(new Date(noteLatestDate));
+
+
+    let letterCount = 0;
+
+    noteList.forEach(note => {
+        letterCount += removeHtmlTagsFromText(note.text).length;
+
+    });
+
+    statisticLetterCount.innerHTML = letterCount;
+
+}
+
+function showContentContainer() {
+
+    let statisticPage = document.querySelector('.statisticContainer');
+    let contentContainer = document.querySelector('.contentContainer');
+
+    statisticPage.classList.remove('statisticContainerActive');
+    contentContainer.classList.remove('contentContainerHidden');
+
+
+}
+
+function setMenuStatisticPage() {
+
+    let statisticBtn = document.querySelector('#statisticBtn');
+    let statisticPage = document.querySelector('.statisticContainer');
+    let contentContainer = document.querySelector('.contentContainer');
+
+    statisticPage.classList.add('statisticContainerActive');
+    contentContainer.classList.add('contentContainerHidden');
+
+    removeActiveClassNavbar();
+    statisticBtn.classList.add('active');
+    selectedNavbarItemIndex = 3;
+
+}
 function setMenuHomePage() {
+    showContentContainer();
     let homeTitle = document.querySelector('.noteBordTitle');
     let homeBtn = document.querySelector('#homeBtn');
     homeTitle.innerHTML = 'All notes';
@@ -158,10 +242,12 @@ function setMenuHomePage() {
     homeBtn.classList.add('active');
     selectedNavbarItemIndex = 0;
     toggleSearchInputField();
+
 }
 
 
 function setMenuSearchPage() {
+    showContentContainer();
     let searchInput = document.querySelector('.searchField');
     let searchBtn = document.querySelector('#searchBtn');
     let searchTitle = document.querySelector('.noteBordTitle');
@@ -181,6 +267,7 @@ function setMenuSearchPage() {
 }
 
 function setMenuFavoritePage() {
+    showContentContainer();
 
     let favBtnNavbar = document.querySelector('#favoriteBtnNavbar');
     let FavoriteTitle = document.querySelector('.noteBordTitle');
@@ -242,7 +329,7 @@ function showNotes(notes = getNotes()) {
     noteRows.innerHTML = '';
 
     notes.sort(function (b, a) {
-        return  new Date(a.date) - new Date(b.date);
+        return new Date(a.date) - new Date(b.date);
     });
 
     for (i = 0; i < notes.length; i++) {

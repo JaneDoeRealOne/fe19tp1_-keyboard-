@@ -34,6 +34,10 @@ body {
 
 }
 
+.contentContainerHidden {
+    display: none;
+}
+
 /*----  popupModal ----*/
 
 .modalContainer {
@@ -425,4 +429,77 @@ li:hover {
     border-radius: 0.2rem;
 }
 
+.statisticContainer {
+    display: none;
+    width:100%;
+    height:100%;
+    
+}
+.statisticContainerActive {
+    display: flex;
+    
+    
+}
 
+.stastisticContent {
+    display: flex;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.7rem;
+    background-color: rgb(240, 240, 240);
+    height: 100%;
+    width: 100%;
+}
+
+.box {
+    
+    margin-top: 3rem;
+    text-align: center;
+    border: solid;
+    border-width: thin;
+    background-color: white;
+    border-color: rgb(200, 200, 200);
+    padding:1rem;
+    border-radius: 0.2rem;
+    width: 16rem;
+    height: 8rem;
+    color: rgb(95, 95, 95);
+    box-shadow: 7px 6px 5px -2px rgba(0,0,0,0.08);
+    margin-left: 3rem;
+    
+}
+
+.bigNummer {
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
+    color: rgb(22, 24, 129);
+}
+
+.latestUpdate {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(22, 24, 129);
+
+}
+
+.statisticTitleContainer {
+    flex-direction: row;
+    text-align: center;
+}
+.statisticTitle {
+    margin-top:4rem;
+    font-size: 2rem;
+    
+
+}
+.statisticTitle {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(87, 87, 87);
+}
+
+.boxContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

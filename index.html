@@ -24,6 +24,7 @@
                 <li id="homeBtn" class="active"><i class="fab fa-quora"></i></li>
                 <li id="searchBtn"><i class="fas fa-search"></i></li>
                 <li id="favoriteBtnNavbar"><i class="far fa-star"></i></li>
+                <li id="statisticBtn"><i class="fas fa-chart-bar"></i></li>
             </ul>
         </nav>
 
@@ -31,7 +32,8 @@
             <div class="containerBoard">
                 <div class="noteBoard" id="noteBoard">
                     <h2 class="noteBordTitle">All notes</h2>
-                            <input type="search" id="searchField" class="searchField" autocomplete="off" placeholder=" Search here" >
+                    <input type="search" id="searchField" class="searchField" autocomplete="off"
+                        placeholder=" Search here">
                     <div class="noteContainer" id="noteContainer">
 
                     </div>
@@ -41,7 +43,7 @@
                     <div id="textEditor">
                         <h1></h1>
                     </div>
-    
+
 
                     <div id="btnSave"><i class="fas fa-save"></i></div>
                     <div id="btnPrint"><i class="fas fa-print"></i></div>
@@ -62,7 +64,39 @@
 
         </div>
 
+        <div class="statisticContainer">
+            <div class="stastisticContent">
+                <div class="statisticTitleContainer">
+                    <h1 class="statisticTitle">Statistics</h1>
+                </div>
+                <div class="boxContainer">
+                    <div class="box">
+                        <h2>Total amount of notes</h2>
+                        <p class="totalNotes bigNummer"></p>
+                    </div>
+
+                    <div class="box">
+                        <h2>Total amount of Favorite</h2>
+                        <p class="totalFavorites bigNummer"></p>
+                    </div>
+
+                    <div class="box">
+                        <h2>The latest updated note</h2>
+                        <p class="latestUpdate"></p>
+                    </div>
+                    <div class="box">
+                        <h2>Total amount of character</h2>
+                        <p class="totalLetters bigNummer"></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
+
+
 
     <div id="modalContainer" class="modalContainer">
         <div id="modalContent" class="modalContent">
