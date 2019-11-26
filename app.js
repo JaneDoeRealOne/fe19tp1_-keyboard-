@@ -147,12 +147,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let statisticBtn = document.querySelector('#statisticBtn');
 
-    statisticBtn.onclick = function () {
-        setMenuStatisticPage();
-        AllCalculateStatistic();
-
-
-    }
+    /* statisticBtn.onclick = function () {
+         setMenuStatisticPage();
+         AllCalculateStatistic();
+ 
+ 
+     }*/
 
 
 });
@@ -414,22 +414,44 @@ function favoriteSelectedNote(element, parentId) {
 }
 
 
+
 function deleteSelectedNote(element) {
 
-    let noteList = getNotes();
+    let deliteNoteContainer = document.querySelector('.deliteNoteContainer');
+    let yesDeliteBtn = document.querySelector('#yesDeliteBtn');
+    let noDeliteBtn = document.querySelector('#noDeliteBtn');
 
-    for (i = 0; i < noteList.length; i++) {
-        let note = noteList[i];
 
-        if (note.id === selectedNoteId) {
-            noteList.splice(i, 1);
-            break;
+
+
+    deliteNoteContainer.classList.add('deliteNoteContainerActive');
+
+    yesDeliteBtn.onclick = function () {
+        deliteNoteContainer.classList.remove('deliteNoteContainerActive');
+
+        let noteList = getNotes();
+
+        for (i = 0; i < noteList.length; i++) {
+            let note = noteList[i];
+
+
+            if (note.id === selectedNoteId) {
+                noteList.splice(i, 1);
+                break;
+            }
         }
+
+        clearEditor();
+        setNotes(noteList);
+        showNotes();
     }
 
-    clearEditor();
-    setNotes(noteList);
-    showNotes();
+    noDeliteBtn.onclick = function () {
+        deliteNoteContainer.classList.remove('deliteNoteContainerActive');
+    }
+
+
+
 }
 
 

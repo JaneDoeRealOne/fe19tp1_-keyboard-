@@ -554,3 +554,57 @@ li:hover {
     }
 
 }
+
+.deliteNoteContainer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top:20rem;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(216, 216, 216, 0.2);
+}
+.deliteNoteContainerActive{
+    display: block;
+
+}
+
+.deliteNoteContent {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin:auto;
+    padding:1.8rem;
+    border-radius:2rem;
+    box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.29);
+    max-width: 25rem;
+
+}
+
+#yesDeliteBtn {
+    font-size: 1.2rem;
+    padding:0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#yesDeliteBtn:hover {
+    background-color: rgb(101, 187, 140);
+
+}
+
+#noDeliteBtn {
+    font-size: 1.2rem;
+    padding:0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#noDeliteBtn:hover {
+    background-color:rgb(211, 80, 80);
+}
