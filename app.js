@@ -417,17 +417,17 @@ function favoriteSelectedNote(element, parentId) {
 
 function deleteSelectedNote(element) {
 
-    let deliteNoteContainer = document.querySelector('.deliteNoteContainer');
-    let yesDeliteBtn = document.querySelector('#yesDeliteBtn');
-    let noDeliteBtn = document.querySelector('#noDeliteBtn');
+    let deliteNoteContainer = document.querySelector('.deleteNoteContainer');
+    let yesDeliteBtn = document.querySelector('#yesDeleteBtn');
+    let noDeliteBtn = document.querySelector('#noDeleteBtn');
 
 
 
 
-    deliteNoteContainer.classList.add('deliteNoteContainerActive');
+    deliteNoteContainer.classList.add('deleteNoteContainerActive');
 
     yesDeliteBtn.onclick = function () {
-        deliteNoteContainer.classList.remove('deliteNoteContainerActive');
+        deliteNoteContainer.classList.remove('deleteNoteContainerActive');
 
         let noteList = getNotes();
 
@@ -447,7 +447,7 @@ function deleteSelectedNote(element) {
     }
 
     noDeliteBtn.onclick = function () {
-        deliteNoteContainer.classList.remove('deliteNoteContainerActive');
+        deliteNoteContainer.classList.remove('deleteNoteContainerActive');
     }
 
 

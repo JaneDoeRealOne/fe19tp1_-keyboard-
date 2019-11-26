@@ -555,7 +555,7 @@ li:hover {
 
 }
 
-.deliteNoteContainer {
+.deleteNoteContainer {
     display: none;
     position: fixed;
     z-index: 1;
@@ -566,12 +566,12 @@ li:hover {
     height: 100%;
     background-color: rgba(216, 216, 216, 0.2);
 }
-.deliteNoteContainerActive{
+.deleteNoteContainerActive{
     display: block;
 
 }
 
-.deliteNoteContent {
+.deleteNoteContent {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     justify-content: center;
@@ -586,25 +586,25 @@ li:hover {
 
 }
 
-#yesDeliteBtn {
+#yesDeleteBtn {
     font-size: 1.2rem;
     padding:0.2rem 0.4rem;
     border-radius: 0.5rem;
     cursor: pointer;
 }
 
-#yesDeliteBtn:hover {
+#yesDeleteBtn:hover {
     background-color: rgb(101, 187, 140);
 
 }
 
-#noDeliteBtn {
+#noDeleteBtn {
     font-size: 1.2rem;
     padding:0.2rem 0.4rem;
     border-radius: 0.5rem;
     cursor: pointer;
 }
 
-#noDeliteBtn:hover {
+#noDeleteBtn:hover {
     background-color:rgb(211, 80, 80);
 }
