@@ -384,8 +384,8 @@ li:hover {
 }
 
 #textEditor {
-   word-break: break-all;
-   padding:2rem;
+   word-break: break-word;
+   padding:4rem;
 }
 
 #btnSave {

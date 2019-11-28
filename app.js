@@ -121,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let searchBtn = document.querySelector('#searchBtn');
-
     searchBtn.onclick = function () {
         setMenuSearchPage();
 
