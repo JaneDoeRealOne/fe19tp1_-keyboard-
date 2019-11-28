@@ -98,7 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     printBtn.onclick = function () {
-        let printWindow = window.open('', 'PRINT', 'height=400, width=600');
+        window.print();
+     /*    let printWindow = window.open('', 'PRINT', 'height=400, width=600');
         let content = document.querySelector('.fr-view').innerHTML;
         printWindow.document.write(content);
 
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () { printWindow.close() }, 500);
 
         }
-
+ */
     }
 
     // TODO refactor onclick. Move to seperate function. El

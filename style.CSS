@@ -608,3 +608,14 @@ li:hover {
 #noDeleteBtn:hover {
     background-color:rgb(211, 80, 80);
 }
+
+@media print {
+    .navContainer, .noteBoard, #btnSave, #btnPrint, #addNoteBtn {
+        display: none;
+    }
+    .noteEditor {
+        box-shadow: none;
+        width: 100%;
+
+    }
+}
