@@ -351,7 +351,7 @@ function showNotes(notes = getNotes()) {
         
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent">
         <div class="starAndTitleContainer"> <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
-        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1></div>
+        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 13)}</h1></div>
        <div class="dateAndTrashBtnContainer"><p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
        </div></div>
@@ -365,7 +365,7 @@ function showNotes(notes = getNotes()) {
         return `
         <div id="${object.id}" onclick="noteClicked(this)" class="noteContent noteContentActive">
        <div class="starAndTitleContainer"> <div class="favoriteBtnContainer"><i class="fas fa-star favoriteBtn ${favoriteSelectedNoteCheck(object)}" onclick ="favoriteSelectedNote(this, ${object.id})"></i></div>
-        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 15)}</h1></div>
+        <h1 class="title">${removeHtmlTagsFromText(object.text).substring(0, 13)}</h1></div>
         <div class="dateAndTrashBtnContainer"><p class="date">${formatDate(new Date(object.date))}</p>
         <div class="deleteBtnContainer deleteBtnContainerActive"><i class="fas fa-trash-alt deleteBtn" onclick="deleteSelectedNote(this)"></i>
        </div></div>
