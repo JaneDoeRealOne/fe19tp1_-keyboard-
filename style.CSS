@@ -6,8 +6,45 @@ html, body {
     width: 100%;
 }
 
+
+:root {
+  
+    --noteEditor-background-color: #fffdfd;
+    --text-color:rgb(15, 15, 15);
+
+    --modalColor-background-color:rgb(255, 255, 255);
+    --searchBackground-background-color:rgb(255, 255, 255);
+    
+    --NavMenu-background-color:#2d3492;
+    --navMenuActive-background-color:rgb(13, 14, 90);
+    --navMenuHover-background-color:rgb(22, 24, 129);
+
+    --notBoardColor-background-color:#f0eeee;
+    --noteFrame-border-color: rgb(221, 221, 221);
+    --noteContentHover-background-color: rgb(228, 228, 224);
+    --noteActiveEditor-background-color: #fffdfd;
+
+
+    --noteTitle-color:rgb(37, 37, 37);
+    --noteBar-background-color: rgb(201, 200, 200);
+    --notBarTitle-color:rgb(114, 114, 114);
+    --date-color:rgb(102, 102, 102);
+    --icon-color:whitesmoke;
+    --iconTrash-color: rgb(61, 61, 61);
+    --btnIcons-color:white;
+
+    --favoriteBtnActive-color:rgb(245, 221, 2);
+
+    --statisticPage-background-color: rgb(240, 240, 240);
+    --statisticBox-background-color:white;
+    --statisticBoxTitle-color: rgb(95, 95, 95);
+    --statisticTitle-color: rgb(87, 87, 87);
+    --statisticText-color: rgb(22, 24, 129);
+}
+
+
 body {
-    background-color: whitesmoke;
+    background-color:var(--mainContent-background-color);
 }
 
 .mainContainer {
@@ -15,22 +52,14 @@ body {
     flex-direction: column;
     width: 100%;
     height:100%;
+    
 }
 
-@media screen and (min-width: 700px) {
-    .mainContainer {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height:100%;
-    }
-}
 
 .contentContainer {
     display: flex;
     width:100%;
     height:100%;
-
 
 }
 
@@ -38,7 +67,6 @@ body {
     display: none;
 }
 
-/*----  popupModal ----*/
 
 .modalContainer {
     display: none;
@@ -70,7 +98,6 @@ body {
 }
 
 
-
 #btnModal {
    
     background-color: rgb(51, 80, 117);
@@ -85,6 +112,7 @@ body {
     text-transform: uppercase;
     cursor: pointer;
 }
+
 #btnModal:hover { 
     background-color: rgb(15, 15, 124);
 
@@ -98,15 +126,11 @@ body {
 }
 
 
-
-
-/*-- NavMenu--*/
-
 .navContainer {
     width: 100%;
     height: auto;
     margin:0;
-    background-color:#2d3492;
+    background-color: var(--NavMenu-background-color);
 }
 
 .navMenu {
@@ -114,7 +138,7 @@ body {
     padding-top:0.9rem;
     padding-bottom: 0.9rem;
     font-size: 1.9rem;
-    color:whitesmoke;
+    color: var(--icon-color);
     cursor: pointer;
 }
  
@@ -135,19 +159,15 @@ li a {
 }
 
 li:hover {
-   background-color: rgb(22, 24, 129);
+   background-color:var(--navMenuHover-background-color);
    
 }
 .active {
-    background-color: rgb(13, 14, 90);
+    background-color:var(--navMenuActive-background-color);
    
    
 }
 
-
-
-
-/* ---- Q homepage ----- */
 
 .containerBoard {
     display: flex;
@@ -159,16 +179,16 @@ li:hover {
 .noteBordTitle {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    color:rgb(114, 114, 114);
+    color:var(--notBarTitle-color);
     font-size: 1.2rem;
     margin: 0;
     padding: 1.5rem;
-    background-color: rgb(201, 200, 200);
+    background-color:var(--noteBar-background-color);
 }
 
 .noteBoard {
     width: 25%;
-    background-color: #f0eeee;
+    background-color: var(--notBoardColor-background-color);
     box-shadow: -1px 1px 5px 4px rgba(0,0,0,0.17);
     overflow-y: scroll;
 }
@@ -190,14 +210,19 @@ li:hover {
     text-align: start;
     border-bottom-style: solid;
     border-width:thin;
-    border-color: rgb(221, 221, 221);
+    border-color:var(--noteFrame-border-color);
     cursor: pointer; 
     word-break: break-all;   
+}
+
+.noteContent:hover {
+    background-color:var(--noteContentHover-background-color);
 }
 
 
 .title {
     margin:0;
+    color:var(--noteTitle-color);
 }
 
 .starAndTitleContainer {
@@ -217,19 +242,27 @@ li:hover {
 }
 
 .date {
+    
+    color:var(--date-color);
+    font-size: 0.9rem;
     margin-block-end: 0rem;
     margin-block-start:0rem;
+    margin-right: 0.1rem;
 
 }
 
 .noteContentActive{
-    background-color: #fffdfd;
+    background-color:var(--noteActiveEditor-background-color);
 
+}
+.noteContentActive:hover {
+    background-color:var(--noteActiveEditor-background-color);
 }
 
 .noteEditor {
     box-shadow: 6px 7px 20px 0px rgba(0,0,0,0.3);
-    background-color: #fffdfd;
+    background-color:var(--noteEditor-background-color);
+    color:var( --text-color);
     width: 85%;
     overflow-y: scroll;
 
@@ -256,9 +289,6 @@ li:hover {
 }
 
 
-
-
-
 .favoriteBtnContainer {
     padding-left: 1rem;
 }
@@ -273,16 +303,10 @@ li:hover {
 
 
 .favoriteBtnActive {
-    color:rgb(245, 221, 2);
+    color:var(--favoriteBtnActive-color);
     transform: scale(1.1);
     
 }
-
-.date {
-    color:rgb(102, 102, 102);
-    font-size: 0.9rem;
-}
-
 
 
 .deleteBtnContainer {
@@ -290,21 +314,20 @@ li:hover {
     height: 0rem;
     font-size: 1.3rem;
     margin-right: 0.3rem;
-    
-
 }
 
 .deleteBtnContainerActive {
     visibility: visible;
 }
 
-
+.deleteBtn {
+    color:var(--iconTrash-color);
+}
 
 .deleteBtn:hover {
     transform: scale(1.1);
 }
 
-/*---- addnote Modal ----*/
 
 .addNoteContainer {
     display: none;
@@ -325,7 +348,8 @@ li:hover {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    background-color: rgb(255, 255, 255);
+    color:var(--text-color);
+    background-color: var(--modalColor-background-color);
     margin:auto;
     padding:1.8rem;
     border-radius:2rem;
@@ -372,8 +396,8 @@ li:hover {
     padding:30xp;
     font-size: 2rem;
 
-     color:white;
-     background-color: rgb(22, 24, 129);
+     color:var(--btnIcons-color);
+     background-color:var(--NavMenu-background-color);
      cursor: pointer;
      transition: all .2s ease-in-out;
      z-index: 1;
@@ -385,7 +409,7 @@ li:hover {
 
 #textEditor {
    word-break: break-word;
-   padding:4rem;
+   padding:2rem;
 }
 
 #btnSave {
@@ -404,8 +428,8 @@ li:hover {
     z-index: 1;
     
 
-    color:white;
-    background-color: rgb(22, 24, 129);
+    color:var(--btnIcons-color);
+    background-color:var(--NavMenu-background-color);
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
@@ -431,8 +455,8 @@ li:hover {
     z-index: 1;
     
 
-    color:white;
-    background-color: rgb(22, 24, 129);
+    color:var(--btnIcons-color);
+    background-color:var(--NavMenu-background-color);
     cursor: pointer;
     transition: all .2s ease-in-out;
 
@@ -455,14 +479,18 @@ li:hover {
     width: 100%;
     font-size: 1.1rem;
     border-radius: 0.2rem;
+    background-color:var(--searchBackground-background-color);
+    color:var(--text-color);
 }
 
 .statisticContainer {
     display: none;
     width:100%;
     height:100%;
+    overflow-y:scroll;
     
 }
+
 .statisticContainerActive {
     display: flex;
     
@@ -474,7 +502,7 @@ li:hover {
     flex-direction: column;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.7rem;
-    background-color: rgb(240, 240, 240);
+    background-color:var(--statisticPage-background-color);
     height: 100%;
     width: 100%;
 }
@@ -485,13 +513,13 @@ li:hover {
     text-align: center;
     border: solid;
     border-width: thin;
-    background-color: white;
+    background-color:var(--statisticBox-background-color);
     border-color: rgb(200, 200, 200);
     padding:1rem;
     border-radius: 0.2rem;
     width: 16rem;
     height: 8rem;
-    color: rgb(95, 95, 95);
+    color:var(--statisticBoxTitle-color);
     box-shadow: 7px 6px 5px -2px rgba(0,0,0,0.08);
     margin-left: 3rem;
     
@@ -501,13 +529,13 @@ li:hover {
     text-align: center;
     font-size: 3rem;
     margin: 0;
-    color: rgb(22, 24, 129);
+    color:var(--statisticText-color);
 }
 
 .latestUpdate {
     text-align: center;
     font-size: 1.5rem;
-    color: rgb(22, 24, 129);
+    color: var(--statisticText-color);
 
 }
 
@@ -523,7 +551,7 @@ li:hover {
 }
 .statisticTitle {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: rgb(87, 87, 87);
+    color:var(--statisticTitle-color);
 }
 
 .boxContainer {
@@ -533,27 +561,6 @@ li:hover {
     cursor: pointer;
 } 
 
-@media screen and (min-width: 700px) {
-    .navContainer {
-        width: auto;
-        height: 100%;
-        background-color:#2d3492;   
-    
-    }
-
-    .navMenu {
-        margin-block-start: 0rem;
-        padding-top:0rem;
-        font-size: 2.5rem;
-        cursor: pointer;
-    }
-    
-    li {
-        display:list-item;  
-        
-    }
-
-}
 
 .deleteNoteContainer {
     display: none;
@@ -566,7 +573,7 @@ li:hover {
     height: 100%;
     background-color: rgba(216, 216, 216, 0.2);
 }
-.deleteNoteContainerActive{
+.deleteNoteContainerActive {
     display: block;
 
 }
@@ -577,7 +584,7 @@ li:hover {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--modalColor-background-color);
     margin:auto;
     padding:1.8rem;
     border-radius:2rem;
@@ -586,7 +593,7 @@ li:hover {
 
 }
 
-#yesDeleteBtn {
+#yesDeleteBtn {    
     font-size: 1.2rem;
     padding:0.2rem 0.4rem;
     border-radius: 0.5rem;
@@ -609,6 +616,8 @@ li:hover {
     background-color:rgb(211, 80, 80);
 }
 
+
+
 @media print {
     .navContainer, .noteBoard, #btnSave, #btnPrint, #addNoteBtn {
         display: none;
@@ -616,6 +625,79 @@ li:hover {
     .noteEditor {
         box-shadow: none;
         width: 100%;
+        overflow:hidden;
 
     }
 }
+
+  
+
+
+@media screen and (min-width: 700px) {
+    .mainContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height:100%;
+    }
+    .navContainer {
+        width: auto;
+        height: 100%;
+        background-color:var(--NavMenu-background-color);   
+    
+    }
+
+    .navMenu {
+        margin-block-start: 0rem;
+        padding-top:0rem;
+        font-size: 2.5rem;
+        cursor: pointer;
+    }
+    
+    li {
+        display:list-item;  
+        
+    }
+}
+
+@media (prefers-color-scheme:dark) {
+
+    :root {
+        --mainContent-background-color: rgb(85, 85, 85);
+        --noteEditor-background-color: #626262;
+        --searchBackground-background-color:rgb(36, 36, 36);
+        
+        --modalColor-background-color:rgb(66, 66, 66);
+
+        --NavMenu-background-color:#080d3b;
+        --navMenuActive-background-color:rgba(0, 1, 26, 0.774);
+        --noteFrame-border-color: rgb(128, 128, 128);
+        --navMenuHover-background-color:rgb(8, 8, 24);
+
+        --text-color:rgb(251, 251, 251);
+        --notBoardColor-background-color:#505050;
+        --noteContentHover-background-color: rgb(53, 53, 53);
+        --noteActiveEditor-background-color: #2c2c2c;
+
+        --noteTitle-color:rgb(255, 255, 255);
+        --noteBar-background-color: rgb(59, 59, 59);
+        --notBarTitle-color:rgb(177, 177, 177);
+        --date-color:rgb(206, 206, 206);
+        --icon-color:whitesmoke;
+        --iconTrash-color: rgb(206, 206, 206);
+        --btnIcons-color:rgb(255, 255, 255);
+
+        --favoriteBtnActive-color:rgb(224, 204, 22);
+
+        --statisticPage-background-color: rgb(85, 85, 85);
+        --statisticBox-background-color:rgb(66, 66, 66);
+        --statisticBoxTitle-color: rgb(221, 221, 221);
+        --statisticTitle-color: rgb(236, 236, 236);
+        --statisticText-color: rgb(9, 10, 75);
+
+    }
+}
+ 
+
+   
+
