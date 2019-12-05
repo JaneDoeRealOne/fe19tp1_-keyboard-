@@ -1,7 +1,7 @@
 ![Quire](/images/Quire.png)
 
 
-#Quire
+# Quire
 
 *All your notes in one place*
 
